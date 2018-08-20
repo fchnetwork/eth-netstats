@@ -28,6 +28,14 @@ table td {
 	border-radius: 2px;
 }
 
+.aerumLogo {
+	width: 346px;
+	display: block;
+	margin: 23px auto;	
+}
+
+
+
 .bg-success,
 .text-success .propagationBox {
 	background: #7bcc3a;
