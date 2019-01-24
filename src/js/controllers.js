@@ -19,6 +19,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 	$scope.blockPropagationAvg = 0;
 	$scope.avgHashrate = 0;
 	$scope.uncleCount = 0;
+	$scope.avgTransactions = 0;
 	$scope.bestStats = {};
 
 	$scope.lastGasLimit = _.fill(Array(MAX_BINS), 2);
@@ -353,8 +354,10 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 					$scope.uncleCountChart = data.uncleCount;
 				}
 
-				if( !_.isEqual($scope.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS )
+				if( !_.isEqual($scope.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS ) {
 					$scope.transactionDensity = data.transactions;
+					calcAvgTransactionsRate();
+				}
 
 				if( !_.isEqual($scope.gasSpending, data.gasSpending) && data.gasSpending.length >= MAX_BINS )
 					$scope.gasSpending = data.gasSpending;
@@ -415,6 +418,17 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 	function findIndex(search)
 	{
 		return _.findIndex($scope.nodes, search);
+	}
+
+	function calcAvgTransactionsRate()
+	{
+		if( $scope.transactionDensity && $scope.transactionDensity.length > 0 )
+		{
+			$scope.avgTransactions = _.reduce($scope.transactionDensity, function (memo, num)
+			{
+				return memo + num;
+			}, 0) / $scope.transactionDensity.length;
+		}
 	}
 
 	function getMinersNames()
