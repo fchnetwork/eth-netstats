@@ -422,12 +422,12 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 	function calcAvgTransactionsRate()
 	{
-		if( $scope.transactionDensity && $scope.transactionDensity.length > 0 )
+		if( $scope.transactionDensity && $scope.transactionDensity.length > 0 && $scope.avgBlockTime > 0)
 		{
 			$scope.avgTransactions = _.reduce($scope.transactionDensity, function (memo, num)
 			{
 				return memo + num;
-			}, 0) / $scope.transactionDensity.length;
+			}, 0) / $scope.transactionDensity.length / $scope.avgBlockTime;
 		}
 	}
 
