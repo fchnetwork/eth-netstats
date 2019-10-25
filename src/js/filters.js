@@ -132,7 +132,7 @@ angular.module('netStatsApp.filters', [])
 		{
 			var tmp = version.split('/');
 
-			tmp[0] = tmp[0].replace('AERUM(++)', 'XRM');
+			tmp[0] = tmp[0].replace('FCH.Network(++)', 'FX');
 
 			if(tmp[0].indexOf('pyethapp') === 0)
 			{
